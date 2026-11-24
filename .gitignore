@@ -1,0 +1,6 @@
+# Blacklist everything
+*
+!*/
+
+# Whitelist files we want
+!.gitignore
