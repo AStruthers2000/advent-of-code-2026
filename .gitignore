@@ -6,8 +6,9 @@
 !.gitignore
 !conanfile.py
 !CMakeLists.txt
+!.vscode/*
 !public/*
 !src/*
 !test/*
-!.vscode/*
+!utils/*
 !input/*/example.txt
