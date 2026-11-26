@@ -4,3 +4,10 @@
 
 # Whitelist files we want
 !.gitignore
+!conanfile.py
+!CMakeLists.txt
+!public/*
+!src/*
+!test/*
+!.vscode/*
+!input/*/example.txt

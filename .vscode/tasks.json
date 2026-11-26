@@ -1,0 +1,76 @@
+{
+    "version": "2.0.0",
+    "windows": {
+        "options": {
+            "shell": {
+                "executable": "cmd.exe",
+                "args": ["/d", "/c", "\"C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\Common7\\Tools\\VsDevCmd.bat\" -arch=x64 -host_arch=x64 &&"]
+            }
+        }
+    },
+    "tasks": [
+        {
+            "label": "Conan: Install",
+            "type": "shell",
+            "command": "conan",
+            "args": [
+                "install", ".",
+                "--output-folder=build",
+                "--build=missing",
+                "-s", "build_type=Debug",
+                "-c", "tools.cmake.cmaketoolchain:generator=Ninja"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "CMake: Configure",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--preset", "conan-debug", "-DBUILD_TESTING=ON"],
+            "dependsOn": "Conan: Install",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build: main",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "--preset", "conan-debug", "--target", "aoc"],
+            "dependsOn": "CMake: Configure",
+            "group": { "kind": "build", "isDefault": true },
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build: tests",
+            "type": "shell",
+            "command": "cmake",
+            "args": ["--build", "--preset", "conan-debug", "--target", "aoc_tests"],
+            "dependsOn": "CMake: Configure",
+            "group": "build",
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Run: main",
+            "type": "shell",
+            "command": "${workspaceFolder}\\build\\build\\Debug\\aoc.exe",
+            "dependsOn": "Build: main",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run: tests",
+            "type": "shell",
+            "command": "${workspaceFolder}\\build\\build\\Debug\\test\\aoc_tests.exe",
+            "dependsOn": "Build: tests",
+            "group": { "kind": "test", "isDefault": true },
+            "problemMatcher": []
+        }
+    ]
+}
