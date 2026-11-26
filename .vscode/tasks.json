@@ -32,6 +32,20 @@
             "problemMatcher": []
         },
         {
+            "label": "IntelliSense: Release module locks",
+            "type": "process",
+            "command": "powershell.exe",
+            "args": [
+                "-NoProfile", "-ExecutionPolicy", "Bypass",
+                "-File", "${workspaceFolder}\\.vscode\\release-intellisense-locks.ps1"
+            ],
+            "presentation": {
+                "reveal": "silent",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
             "label": "CMake: Configure",
             "type": "shell",
             "command": "cmake",
@@ -44,7 +58,8 @@
             "type": "shell",
             "command": "cmake",
             "args": ["--build", "--preset", "conan-debug", "--target", "aoc"],
-            "dependsOn": "CMake: Configure",
+            "dependsOrder": "sequence",
+            "dependsOn": ["CMake: Configure", "IntelliSense: Release module locks"],
             "group": { "kind": "build", "isDefault": true },
             "problemMatcher": "$msCompile"
         },
@@ -53,7 +68,8 @@
             "type": "shell",
             "command": "cmake",
             "args": ["--build", "--preset", "conan-debug", "--target", "aoc_tests"],
-            "dependsOn": "CMake: Configure",
+            "dependsOrder": "sequence",
+            "dependsOn": ["CMake: Configure", "IntelliSense: Release module locks"],
             "group": "build",
             "problemMatcher": "$msCompile"
         },

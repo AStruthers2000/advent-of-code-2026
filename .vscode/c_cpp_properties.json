@@ -2,13 +2,10 @@
     "configurations": [
         {
             "name": "Windows",
+            "compileCommands": "${workspaceFolder}/build/build/Debug/compile_commands.json",
             "intelliSenseMode": "windows-msvc-x64",
             "compilerPath": "cl.exe",
             "cppStandard": "c++23",
-            "includePath": [
-                "${workspaceFolder}/public",
-                "${workspaceFolder}/src"
-            ],
             "compilerArgs": [
                 "/ifcSearchDir", "${workspaceFolder}/build/build/Debug/utils/CMakeFiles/aoc_modules.dir"
             ]
