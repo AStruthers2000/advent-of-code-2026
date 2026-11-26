@@ -5,11 +5,6 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-if(MSVC)
-    add_compile_options(/experimental:module)
-    add_compile_options(/std:c++latest)
-endif()
-
 # Find external dependencies
 find_package(glm CONFIG REQUIRED)
 
