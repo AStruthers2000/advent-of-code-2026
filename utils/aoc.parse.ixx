@@ -31,7 +31,23 @@ inline auto split_sv(std::string_view sv, std::string_view delims) -> std::vecto
 export namespace AoC::Parse
 {
 
-auto split(std::string_view sv, std::string_view delims) -> std::vector<std::string_view>
+auto split(std::string_view sv, std::string_view delim) -> std::vector<std::string_view>
+{
+    std::vector<std::string_view> out{};
+    if (delim.empty()) // ambiguous -> return the whole string as one token
+    {
+        if (!sv.empty()) out.push_back(sv);
+        return out;
+    }
+
+    for (auto const& word : std::views::split(sv, delim))
+    {
+        out.emplace_back(word);
+    }
+    return out;
+}
+
+auto split_any(std::string_view sv, std::string_view delims) -> std::vector<std::string_view>
 {
     return split_sv(sv, delims);
 }

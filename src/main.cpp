@@ -12,11 +12,11 @@ int main()
     //     std::println("{}", line);
     // }
 
-    std::string line = "ccc: ddd eee fff";
-    auto split = AoC::Parse::split(std::string_view{line}.substr(5), " ");
+    std::string line = "HelloSPLIT HEREworld!";
+    auto split = AoC::Parse::split_any("Hello world,this-is|a*sentence_with+weird/delims", " ,-|*_+/");
     for (auto word : split)
     {
-        std::print("{} ", word);
+        std::println("{}", word);
     }
 
     return 0;
