@@ -7,12 +7,6 @@ export module aoc.io;
 
 import std;
 
-// export enum class InputType
-// {
-//     Input,
-//     Example
-// };
-
 export namespace AoC::IO
 {
 
@@ -48,7 +42,6 @@ auto input_path(int day, InputType input_type) -> std::filesystem::path
     cwd.append(day_str);
     cwd.append(file_str);
     cwd.make_preferred();
-    std::println("{}", cwd.string());
     return cwd;
 }
 

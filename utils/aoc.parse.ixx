@@ -3,7 +3,42 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /// @brief Utilities for spliting/trimming/number extraction
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-module;
-
-//--------------------------------------------------------------------------------------------------
 export module aoc.parse;
+
+import std;
+
+inline auto split_sv(std::string_view sv, std::string_view delims) -> std::vector<std::string_view>
+{
+    std::vector<std::string_view> out;
+    if (delims.empty()) // ambiguous -> return the whole string as one token
+    {
+        if (!sv.empty()) out.push_back(sv);
+        return out;
+    }
+
+    std::size_t pos = 0;
+    while (pos <= sv.size())
+    {
+        auto next = sv.find_first_of(delims, pos);
+        if (next != pos) out.push_back(sv.substr(pos, next - pos));
+        if (next == std::string_view::npos) break;
+        pos = next + 1;
+    }
+
+    return out;
+}
+
+export namespace AoC::Parse
+{
+
+auto split(std::string_view sv, std::string_view delims) -> std::vector<std::string_view>
+{
+    return split_sv(sv, delims);
+}
+
+auto split_lines(std::string_view sv) -> std::vector<std::string_view>
+{
+    return split_sv(sv, "\n");
+}
+
+} // namespace AoC::Parse
