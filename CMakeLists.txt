@@ -13,6 +13,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Find external dependencies
 find_package(glm CONFIG REQUIRED)
+find_package(ctre CONFIG REQUIRED)
 
 # Add utils library CMakeLists
 add_subdirectory(utils)
@@ -32,6 +33,7 @@ target_include_directories(aoc
 target_link_libraries(aoc
     PUBLIC
         glm::glm
+        ctre::ctre
     PRIVATE
         aoc_modules
 )

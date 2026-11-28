@@ -1,3 +1,5 @@
+#include <ctre.hpp>
+
 import std;
 import aoc;
 
@@ -34,7 +36,16 @@ int main()
     //     std::println("{}", i);
     // }
 
+    std::string line = "aaa: bbb ccc ddd";
+    if (auto match = ctre::match<R"((?<src>[a-z]{3}): (.*)$)">(line))
+    {
+        std::println("{}\n", match.get<"src">().to_view());
 
+        for (auto word : ctre::range<R"([a-z]{3})">(match.get<2>().to_view()))
+        {
+            std::println("{}", word.to_view());
+        }
+    }
 
     return 0;
 }

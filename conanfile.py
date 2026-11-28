@@ -15,6 +15,7 @@ class AdventOfCode2026Conan(ConanFile):
 
     def requirements(self):
         self.requires("glm/1.0.1", transitive_headers=True)
+        self.requires("ctre/3.11.0")
 
 
     def layout(self):
